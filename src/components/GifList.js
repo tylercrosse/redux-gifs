@@ -6,6 +6,6 @@ export default function GifList(props) {
     return <GifItem key={image.id} gif={image} />
   });
   return (
-    <ul>{gifItems}</ul>
+    <div className='gif-list'>{gifItems}</div>
   );
 };
