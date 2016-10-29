@@ -1,9 +1,9 @@
 import React      from 'react';
 import request    from 'superagent';
-import GifList    from './components/GifList.jsx'
-import GifModal   from './components/GifModal.jsx'
-import SearchBar  from './components/SearchBar.jsx'
-import                 './styles/app.css'
+import GifList    from '../components/GifList.jsx'
+import GifModal   from '../components/GifModal.jsx'
+import SearchBar  from '../components/SearchBar.jsx'
+import                 '../styles/app.css'
 
 export default class App extends React.Component {
   constructor(props) {
