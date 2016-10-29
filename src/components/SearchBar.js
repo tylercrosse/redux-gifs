@@ -12,7 +12,7 @@ export default class SearchBar extends React.Component {
   render() {
     return (
       <div className="search">
-        <input onChange={(e) => this.onInputChange(e.target.value)}/>
+        <input onChange={(e) => this.onInputChange(e.target.value)} />
       </div>
     )
   }
