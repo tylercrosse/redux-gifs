@@ -1,17 +1,25 @@
-import React      from 'react';
-import { connect } from 'react-redux';
+import React                  from 'react';
+import { connect }            from 'react-redux';
+import { bindActionCreators } from 'redux'
 // import request    from 'superagent';
-// import GifList    from '../components/GifList.jsx'
-// import GifModal   from '../components/GifModal.jsx'
-// import SearchBar  from '../components/SearchBar.jsx'
-// import                 '../styles/app.css'
-import GifsTemp from '../components/GifsTemp';
+import GifList      from '../components/GifList.jsx'
+import GifModal     from '../components/GifModal.jsx'
+import * as Actions from '../actions';
+import SearchBar    from '../components/SearchBar.jsx';
+import                   '../styles/app.css';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <GifsTemp gifs={ this.props.gifs } />
+        <SearchBar onTermChange={this.props.actions.requestGifs} />
+        <GifList gifs={this.props.gifs} 
+          onGifSelect={selectedGif => this.props.actions.openModal({selectedGif})}
+        />
+        <GifModal modalIsOpen={this.props.modalIsOpen}
+          selectedGif={this.props.selectedGif}
+          onRequestClose={() => this.props.actions.closeModal()}
+        /> 
       </div>
     )
   }
@@ -19,8 +27,16 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    gifs: state.gifs
+    gifs: state.gifs.data,
+    modalIsOpen: state.modal.modalIsOpen,
+    selectedGif: state.modal.selectedGif
   }
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
