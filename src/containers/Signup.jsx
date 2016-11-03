@@ -1,45 +1,47 @@
 import React                from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect }          from 'react-redux';
+import * as Actions         from '../actions';
 
-function validate(values) {
+const validate = values => {
   const errors = {};
-  
+
   if (!values.email) {
-    errors.email = 'Please enter an email.'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]\.[A-Z]{2,4}/i.test(values.email)) {
+    errors.email = "Please enter an email.";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
-  
+
   if (!values.password) {
-    errors.password = 'Please enter a password.';
+    errors.password = "Please enter a password.";
   }
-  
+
   if (!values.passwordConfirmation) {
-    errors.passwordConfirmation = 'Please enter a password confirmation.';
+    errors.passwordConfirmation = "Please enter a password confirmation.";
   }
-  
-  if (values.password !== values.passwordConfirmation) {
-    errors.password = 'Passwords do not match.';
+
+  if (values.password !== values.passwordConfirmation ) {
+    errors.password = 'Passwords do not match';
   }
-  
+
   return errors;
-}
+};
 
 class Signup extends React.Component {
-  handleFormSubmit(values) {
-    console.log(values);
-  }
-  renderField({ input, label, type, meta: { touched, error } }) {
-    return (
-      <fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
-        <label className="control-label">{label}</label>
-        <div>
-          <input {...input} placeholder={label} className="form-control" type={type} />
-          {touched && error && <div className="help-block">{error}</div>}
-        </div>
-      </fieldset>
-    );
-  }
+  handleFormSubmit = (values) => {
+    this.props.signInUser(values);
+  };
+
+  renderField = ({ input, label, type, meta: { touched, error } }) => (
+    <fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
+      <label className="control-label">{label}</label>
+      <div>
+        <input {...input} placeholder={label} className="form-control" type={type} />
+        {touched && error && <div className="help-block">{error}</div>}
+      </div>
+    </fieldset>
+  );
+
   render() {
     return (
       <div className="container">
@@ -58,7 +60,7 @@ class Signup extends React.Component {
   }
 }
 
-export default reduxForm({
+export default connect(null, Actions)(reduxForm({
   form: 'signup',
   validate
-})(Signup);
+})(Signup));
