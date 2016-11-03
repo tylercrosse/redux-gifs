@@ -3,9 +3,9 @@ import ReactDOM       from 'react-dom';
 import { Provider }   from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import Home           from './containers/Home.jsx'
+import Signup         from './containers/Signup.jsx'
+import Login          from './containers/Login.jsx'
 import App            from './components/App.jsx'
-import Signup         from './components/Signup.jsx'
-import Login          from './components/Login.jsx'
 import Favorites      from './components/Favorites.jsx'
 import configureStore from './store/configureStore'
 
