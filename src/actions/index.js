@@ -1,9 +1,10 @@
-import request from 'superagent';
+import request            from 'superagent';
+import { browserHistory } from 'react-router';
 
-export const OPEN_MODAL = 'OPEN_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';
-export const REQUEST_GIFS = 'REQUEST_GIFS';
-export const SIGN_IN_USER = 'SIGN_IN_USER';
+export const OPEN_MODAL    = 'OPEN_MODAL';
+export const CLOSE_MODAL   = 'CLOSE_MODAL';
+export const REQUEST_GIFS  = 'REQUEST_GIFS';
+export const SIGN_IN_USER  = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
@@ -32,12 +33,14 @@ export function closeModal() {
 }
 
 export function signInUser() {
+  browserHistory.push('/favorites');
   return {
     type: SIGN_IN_USER
   }
 }
 
-export function singOutUser() {
+export function signOutUser() {
+  browserHistory.push('/');
   return {
     type: SIGN_OUT_USER
   }
